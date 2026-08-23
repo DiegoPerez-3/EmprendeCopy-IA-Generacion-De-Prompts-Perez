@@ -230,7 +230,7 @@ Estos valores son solo orientativos y pueden cambiar.
 ## Estructura del repositorio
 
 ```text
-EmprendeCopy_FastPrompting/
+EmprendeCopy-IA-Generacion-De-Prompts-Perez/
 ├── README.md
 ├── EmprendeCopy_POC_FINAL.ipynb
 ├── requirements.txt
