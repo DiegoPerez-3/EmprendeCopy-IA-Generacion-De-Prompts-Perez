@@ -92,7 +92,7 @@ La notebook sigue este orden:
 1. Definir el caso de prueba.
 2. Hacer una primera consulta zero-shot.
 3. Repetir el mismo caso usando few-shot.
-4. Comparar el formato de ambas respuestas.
+4. Comparar el formato de ambas respuestas con una escala de 0 a 10.
 5. Revisar la imagen generada en la primera entrega.
 6. Detectar un problema en el prompt visual y proponer una corrección.
 7. Armar una versión final optimizada.
@@ -112,7 +112,7 @@ La comparación se hace sobre el mismo caso para que el cambio de resultado depe
 - **Few-shot prompting**
 - **Iteración de prompts**
 - **Structured Outputs / JSON Schema**
-- **Herramienta texto-imagen** para la generación visual
+- **Generación de imágenes de ChatGPT** para la prueba visual
 
 ### ¿Por qué elegí few-shot?
 
@@ -135,7 +135,7 @@ La contra es que los ejemplos hacen que el prompt sea más largo y use más toke
 
 La implementación principal está en:
 
-[`EmprendeCopy_POC_FINAL.ipynb`](EmprendeCopy_POC_FINAL.ipynb)
+[`Preentrega2-DiegoPerez.ipynb`](Preentrega2-DiegoPerez.ipynb)
 
 La notebook contiene:
 
@@ -166,11 +166,38 @@ Lo que quiero observar es si few-shot ayuda a mantener mejor el formato y el est
 
 ---
 
+## Escala de evaluación
+
+A partir de la devolución de la primera entrega, incorporé una escala de **0 a 10** para medir la mejora entre las dos configuraciones de prompt con los mismos criterios.
+
+Cada criterio vale 2 puntos:
+
+| Criterio | Máximo | Zero-shot | Few-shot |
+|---|---:|---:|---:|
+| Respeta la estructura solicitada | 2 | 0 | 2 |
+| Devuelve exactamente 5 hashtags | 2 | 0 | 2 |
+| El copy tiene como máximo 80 palabras | 2 | 2 | 2 |
+| Incluye una CTA clara y accionable | 2 | 2 | 2 |
+| No agrega canales, condiciones o datos no proporcionados | 2 | 0 | 2 |
+| **Total** | **10** | **4/10** | **10/10** |
+
+El zero-shot genera un contenido válido, pero se aleja de algunas reglas: no usa la estructura indicada, devuelve 10 hashtags y agrega un enlace en la bio/DM que no estaba en los datos originales.
+
+El few-shot respeta mejor las reglas del formato. Por eso, usando esta escala, pasa de **4/10 a 10/10**.
+
+La escala no busca medir cuál texto es más creativo. La uso para comparar de forma más objetiva el cumplimiento de las reglas que necesito para el proyecto.
+
+---
+
 ## Prueba texto-imagen e iteración
 
-En la primera entrega se generó una imagen para una peluquería a partir de este prompt:
+En la primera entrega generé una imagen para una peluquería a partir de este prompt:
 
 > Professional advertising photograph of a modern women's hair salon, stylish woman with freshly colored glossy hair, elegant minimalist interior, medium close-up composition, warm soft lighting, sophisticated neutral color palette, realistic textures, clean premium aesthetic, empty space for promotional copy, square Instagram composition.
+
+Para esa prueba usé la **herramienta de generación de imágenes de ChatGPT**. La generación visual la hice de forma manual: primero obtengo el prompt y después lo uso en la herramienta de imágenes.
+
+Esto significa que la POC no hace una llamada automatizada adicional a una API de imágenes. Las consultas y costos que comparo corresponden a Groq.
 
 El resultado cumplió bastante bien con la estética buscada, pero agregó el texto:
 
@@ -232,7 +259,7 @@ Estos valores son solo orientativos y pueden cambiar.
 ```text
 EmprendeCopy-IA-Generacion-De-Prompts-Perez/
 ├── README.md
-├── EmprendeCopy_POC_FINAL.ipynb
+├── Preentrega2-DiegoPerez.ipynb
 ├── requirements.txt
 ├── .gitignore
 └── assets/
@@ -265,7 +292,7 @@ Nunca se debe subir una API key real a GitHub.
 
 Después de hacer las pruebas, considero que las técnicas vistas en esta etapa mejoran la propuesta de EmprendeCopy.
 
-Zero-shot sirve para obtener una primera respuesta sin ejemplos, mientras que few-shot permite marcar mejor el formato que quiero repetir.
+Zero-shot sirve para obtener una primera respuesta sin ejemplos, mientras que few-shot permite marcar mejor el formato que quiero repetir. Con la escala que agregué, la comparación quedó en **4/10 para zero-shot y 10/10 para few-shot**.
 
 La prueba visual también mostró que el primer resultado no siempre es definitivo y que revisar el resultado permite ajustar el prompt de forma más concreta.
 
