@@ -56,6 +56,12 @@ La POC utiliza Python, Jupyter Notebook / Google Colab y Groq. La generación de
 
 El alcance está limitado a generar una publicación promocional como punto de partida, por lo que se mantiene dentro del tiempo y los recursos disponibles.
 
+
+
+### ¿Por qué EmprendeCopy necesita IA?
+
+EmprendeCopy necesita IA porque tiene que adaptar el contenido y la propuesta visual a información diferente de cada negocio, en lugar de limitarse a completar una plantilla fija. El público, el tono, la promoción y el objetivo pueden cambiar en cada caso.
+
 ---
 
 ## Objetivos
@@ -109,6 +115,14 @@ El proyecto se desarrolló en estas etapas:
 Elegí few-shot como técnica principal porque EmprendeCopy necesita una salida consistente, no solamente un texto creativo. Los ejemplos ayudan a fijar el formato de título, copy, CTA y hashtags.
 
 La desventaja es que utiliza más tokens de entrada, por eso comparo el costo y dejo la experimentación separada del flujo final.
+
+
+
+### ¿Por qué utilizo los dos modelos?
+
+El modelo **texto-texto** interpreta los datos variables del negocio y los transforma en contenido promocional adaptado al público, tono y objetivo.
+
+El modelo **texto-imagen** complementa esa salida porque la imagen forma parte de una publicación para redes sociales. No la uso solamente como decoración: busca representar visualmente la misma promoción y el mismo contexto del copy.
 
 ---
 
@@ -208,6 +222,31 @@ La notebook utiliza los tokens informados por Groq para estimar el costo de cada
 
 La generación visual se hace manualmente en ChatGPT y no agrega una llamada automatizada a una API de imágenes.
 
+
+---
+
+## Limitaciones
+
+La POC cumple con el alcance planteado, pero encontré algunas limitaciones:
+
+- Los modelos pueden producir resultados diferentes entre ejecuciones.
+- El contenido necesita revisión humana antes de publicarse.
+- Una restricción visual puede no cumplirse al primer intento, como ocurrió con el texto de la primera imagen.
+- La generación de la imagen se realiza manualmente.
+- Few-shot mejora la consistencia, pero utiliza más tokens de entrada.
+
+Estas limitaciones no impiden que EmprendeCopy funcione como POC, pero son puntos a considerar si se quisiera llevar a una versión más completa.
+
+---
+
+## Posibles mejoras
+
+Como mejora futura podría incorporar **encadenado de prompts**.
+
+Después de la generación principal, un segundo prompt podría actuar como revisor y comprobar automáticamente el formato, la cantidad de hashtags y si se agregó información no proporcionada.
+
+No lo implementé ahora porque implicaría una segunda consulta a la API por cada publicación y uno de los objetivos del proyecto es reducir consultas innecesarias. Si una versión futura necesitara una validación automática más estricta, sería una de las primeras mejoras que probaría.
+
 ---
 
 ## Seguridad
@@ -233,6 +272,8 @@ La iteración de imagen también mostró una mejora observable: el primer result
 Finalmente, el flujo de uso real quedó reducido a una consulta de texto por publicación, manteniendo la generación visual como un paso manual.
 
 EmprendeCopy no busca reemplazar al usuario, sino darle un punto de partida más rápido y estructurado que pueda revisar y adaptar antes de publicar.
+
+También pude identificar limitaciones concretas y una posible mejora futura mediante encadenado de prompts, sin agregar esa segunda consulta a la versión actual porque prioricé mantener el flujo final simple y eficiente.
 
 ---
 
